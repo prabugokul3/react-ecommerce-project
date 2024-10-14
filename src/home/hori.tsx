@@ -22,7 +22,6 @@ const HorizontalScroll = () => {
     ]);
     const [scroll] = useState(300)
 
-    const scrollContainerRef: any = useRef<HTMLDivElement>(null);
     console.log(scroll)
     useEffect(() => {
         const cardElements = document.querySelectorAll('.my-card');
