@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Navigate, Outlet, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Outlet, Route, Routes } from 'react-router-dom';
 import { Home } from '../home/home';
 import { Product } from '../products/product';
 import { Navbar } from '../navbar';

@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-import { Outlet, Link } from "react-router-dom";
+import {  Link } from "react-router-dom";
 
 export const Navbar = () => {
     return (

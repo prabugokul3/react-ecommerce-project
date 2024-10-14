@@ -4,12 +4,10 @@ import './hori.css';
 import image1 from '../images/pexels-mareefe-672046.jpg';
 import image2 from '../images/pexels-lilartsy-1793035.jpg';
 import image3 from '../images/pexels-christina99999-25676797 (1).jpg';
-import next from '../images/next (1).png';
-import previous from '../images/previous.png';
 
 
 const HorizontalScroll = () => {
-    const [products, setProducts] = useState([
+    const [products] = useState([
         { id: 1, title: 'Card 1', content: 'This is the first card.', image: image1 },
         { id: 2, title: 'Card 2', content: 'This is the second card.', image: image2 },
         { id: 3, title: 'Card 3', content: 'This is the third card.', image: image3 },
@@ -22,7 +20,7 @@ const HorizontalScroll = () => {
         { id: 10, title: 'Card 10', content: 'This is the tenth card.', image: image1 },
         { id: 11, title: 'Card 11', content: 'This is the eleventh card.', image: image2 },
     ]);
-    const [scroll, setScroll] = useState(300)
+    const [scroll] = useState(300)
 
     const scrollContainerRef: any = useRef<HTMLDivElement>(null);
     console.log(scroll)
@@ -43,19 +41,19 @@ const HorizontalScroll = () => {
         });
     }, [scroll]);
 
-    const scrollLeft = () => {
-        if (scrollContainerRef.current) {
-            scrollContainerRef.current.scrollLeft -= 300;
-            setScroll(scrollContainerRef.current.scrollLeft)
-        }
-    };
+    // const scrollLeft = () => {
+    //     if (scrollContainerRef.current) {
+    //         scrollContainerRef.current.scrollLeft -= 300;
+    //         setScroll(scrollContainerRef.current.scrollLeft)
+    //     }
+    // };
 
-    const scrollRight = () => {
-        if (scrollContainerRef.current) {
-            scrollContainerRef.current.scrollLeft += 300;
-            setScroll(scrollContainerRef.current.scrollLeft)
-        }
-    };
+    // const scrollRight = () => {
+    //     if (scrollContainerRef.current) {
+    //         scrollContainerRef.current.scrollLeft += 300;
+    //         setScroll(scrollContainerRef.current.scrollLeft)
+    //     }
+    // };
 
     return (
         <>
