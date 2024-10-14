@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: rgb(243, 189, 118);
 }
 
 .App-logo {
@@ -32,7 +33,52 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
+
+.navbar{
+  background-color: rgb(243, 189, 118);
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  
+  text-decoration: none;
+  display: inline;
+  margin: 2px;
+}
+
+.text{
+  text-decoration: none;
+  color: brown;
+  margin: 10px;
+}
+
+Link{
+  transition:  font-size ;
+  font-size: 20px;
+}
+
+Link:hover{
+  font-size: 22px;
+}
+
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
