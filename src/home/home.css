@@ -77,31 +77,24 @@ Link:hover {
     margin: auto;
 }
 
-.fade {
-    animation-name: fade;
-    animation-duration: 1.5s;
-}
-
-@keyframes fade {
-    from {
-        opacity: .4
-    }
-
-    to {
-        opacity: 1
-    }
-}
-
-@keyframes slowFadeIn {
+/* Add keyframes for the bottom-to-top sliding effect */
+@keyframes slideUp {
     from {
         opacity: 0;
-        transform: translateY(10px); 
+        transform: translateY(100px);
     }
     to {
         opacity: 1;
+        transform: translateY(0);
     }
 }
 
-.fade-in-slow {
-    animation: slowFadeIn 4s ease-in-out; 
+.scroll-slide-up {
+    opacity: 0; /* Start hidden */
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.scroll-animate {
+    opacity: 1;
+    animation: slideUp 1s ease-out forwards;
 }

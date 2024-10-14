@@ -57,8 +57,8 @@ const HorizontalScroll = () => {
 
     return (
         <>
-            <div className="   position-relative">
-                <div className=" d-flex flex-nowrap overflow-auto" ref={scrollContainerRef}>
+            <div className="position-relative">
+                <div className=" d-flex flex-nowrap overflow-auto" >
                     {products.map((card) => (
                         <div key={card.id} className="card mx-2 my-card" style={{ minWidth: '300px' }}>
                             <img src={card.image} className="card-img-top cardImage" alt="..." id="cardImage"></img>
