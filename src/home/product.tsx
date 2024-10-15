@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './hori.css';
+import './product.css';
 import image1 from '../images/pexels-mareefe-672046.jpg';
 import image2 from '../images/pexels-lilartsy-1793035.jpg';
 import image3 from '../images/pexels-christina99999-25676797 (1).jpg';
-
 
 const HorizontalScroll = () => {
     const [products] = useState([
@@ -20,9 +19,8 @@ const HorizontalScroll = () => {
         { id: 10, title: 'Card 10', content: 'This is the tenth card.', image: image1 },
         { id: 11, title: 'Card 11', content: 'This is the eleventh card.', image: image2 },
     ]);
-    const [scroll] = useState(300)
+    // const [scroll] = useState(300)
 
-    console.log(scroll)
     useEffect(() => {
         const cardElements = document.querySelectorAll('.my-card');
 
@@ -38,7 +36,7 @@ const HorizontalScroll = () => {
                 image.src = originalImageSrc;
             });
         });
-    }, [scroll]);
+    }, []);
 
     // const scrollLeft = () => {
     //     if (scrollContainerRef.current) {
@@ -55,11 +53,11 @@ const HorizontalScroll = () => {
     // };
 
     return (
-            <div className="position-relative">
-                <div className=" d-flex flex-nowrap overflow-auto" >
+            <div className="position-relative" style={{borderRadius:0}}>
+                <div className=" d-flex flex-nowrap overflow-auto scroll-animate" >
                     {products.map((card) => (
-                        <div key={card.id} className="card mx-2 my-card" style={{ minWidth: '300px' }}>
-                            <img src={card.image} className="card-img-top cardImage" alt="..." id="cardImage"></img>
+                        <div key={card.id} className="card mx-2 my-card scroll-animate" style={{ minWidth: '300px' }}>
+                            <img src={image1} className="card-img-top cardImage rounded-0" alt="..." id="cardImage"></img>
                             <div className="card-body">
                                 <h5 className="card-title d-flex justify-content-start">{card.title}</h5>
                                 <p className="card-text d-flex justify-content-start">{card.content}</p>
