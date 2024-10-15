@@ -8,28 +8,7 @@ import image3 from '../images/pexels-christina99999-25676797 (1).jpg';
 import HorizontalScroll from './hori';
 
 export const Home = () => {
-    const fadeInRef = useRef(null);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            const scrollPosition = window.scrollY + window.innerHeight;
-            const fadeInElement:any = fadeInRef.current;
-
-            if (fadeInElement) {
-                const elementPosition = fadeInElement.getBoundingClientRect().top + window.scrollY;
-
-                if (scrollPosition > elementPosition) {
-                    fadeInElement.classList.add('scroll-animate');
-                }
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
 
     return (
         <div>
@@ -44,7 +23,7 @@ export const Home = () => {
                     <img className="d-block w-100" src={image3} alt="Third slide" />
                 </Carousel.Item>
             </Carousel>
-            <div ref={fadeInRef} className="fade-in-slow scroll-slide-up">
+            <div className="scroll-slide-up scroll-animate ">
                 <div className="fs-1 text">
                     Discover Your Inner Light &<br />
                     Illuminate Your Radiance

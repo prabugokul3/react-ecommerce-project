@@ -90,11 +90,10 @@ Link:hover {
 }
 
 .scroll-slide-up {
-    opacity: 0; /* Start hidden */
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+ 
+    transition:  transform 2s ease-in-out;
 }
 
 .scroll-animate {
-    opacity: 1;
-    animation: slideUp 1s ease-out forwards;
+    animation: slideUp 0.5s ease-out forwards;
 }

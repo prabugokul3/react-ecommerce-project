@@ -55,7 +55,6 @@ const HorizontalScroll = () => {
     // };
 
     return (
-        <>
             <div className="position-relative">
                 <div className=" d-flex flex-nowrap overflow-auto" >
                     {products.map((card) => (
@@ -82,7 +81,6 @@ const HorizontalScroll = () => {
             </div>
 
 
-        </>
     );
 };
 
