@@ -29,7 +29,7 @@ export const Home = () => {
                 </div>
             </div>
 
-            <div className="fs-1 text   text-center">
+            <div className="fs-1 text2   text-center">
                 Discover Your Inner Light &<br />
                 Illuminate Your Radiance
             </div>
@@ -69,7 +69,7 @@ export const Home = () => {
                             <i className="fa-brands fa-instagram  fa-2x text-white mx-2"></i>
                         </div>
                     </div>
-                    <div className='text fw-bold fs-1 d-flex justify-content-center align-items-center'>
+                    <div className='text2 fw-bold fs-1 d-flex justify-content-center align-items-center'>
                         9 S K I N
                     </div>
                     <div className=' text-white d-flex justify-content-center align-items-center'>
