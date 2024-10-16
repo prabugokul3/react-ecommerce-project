@@ -10,15 +10,13 @@
 
 
 .card {
-    background-color: #e7cca4;
-    color: brown;
+    background-color: 4A2A1E;
+    color: 4A2A1E;
     border: none;
     border-radius: 0px;
 }
 
-.border-1 {
-    color: brown;
-}
+
 
 .my-card {
     overflow: hidden;
@@ -37,7 +35,7 @@
 @keyframes slideUp {
     from {
         opacity: 0;
-        transform: translateY(100px);
+        transform: translateY(10px);
     }
 
     to {
