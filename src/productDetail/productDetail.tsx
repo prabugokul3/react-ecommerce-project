@@ -67,7 +67,7 @@ export const ProductDetail = () => {
                     <div className="mt-2 fs-4 content">{detail?.content}</div>
                     <div className='mt-5 mb-2'>
                         <button type="button" className="btn w-100 rounded-pill mb-2 fs-5" style={{ border: '1px solid brown', color: '#4A2A1E', borderColor: '#4A2A1E' }}>Add to cart</button>
-                        <button type="button" className="btn w-100 rounded-pill fs-5" style={{ border: '1px solid brown', color: '#4A2A1E', borderColor: '#4A2A1E' }}>Buy now</button>
+                        <button type="button" className="btn w-100 rounded-pill fs-5" style={{ border: '1px solid brown', color: 'white', borderColor: '#4A2A1E',backgroundColor:'#4A2A1E' }}>Buy now</button>
                     </div>
                 </div>
             </div>
