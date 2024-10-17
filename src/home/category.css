@@ -1,13 +1,10 @@
 .d-flex.overflow-auto {
     scroll-behavior: smooth;
-    padding: 10px 0;
 }
 
 .d-flex.overflow-auto::-webkit-scrollbar {
     display: none;
 }
-
-
 
 .card {
     background-color: 4A2A1E;
@@ -15,8 +12,6 @@
     border: none;
     border-radius: 0px;
 }
-
-
 
 .my-card {
     overflow: hidden;

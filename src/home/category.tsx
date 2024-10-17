@@ -60,9 +60,9 @@ const HorizontalScroll = () => {
 
     return (
             <div className="position-relative" style={{borderRadius:0}}>
-                <div className="ms-5 d-flex flex-nowrap overflow-auto scroll-animate" style={{height:'10%'}}>
+                <div className="ms-5 d-flex overflow-auto scroll-animate" >
                     {products.map((card) => (
-                        <div key={card.id} className="card mx-2 ms-4 my-card scroll-animate" style={{ minWidth: '50%' }}>
+                        <div key={card.id} className="card mx-2 ms-4 my-card " style={{ minWidth: '300px' }}>
                             <img src={card.image} className="card-img-top cardImage rounded-0" alt="..." id="cardImage"></img>
                             <div className="card-body">
                                 <h5 className="card-title d-flex justify-content-start">{card.title}</h5>
