@@ -4,6 +4,7 @@ import './category.css';
 import image1 from '../images/pexels-lilartsy-1793035.jpg';
 import image2 from '../images/pexels-lilartsy-1793035.jpg';
 import image3 from '../images/pexels-lilartsy-1793035.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const HorizontalScroll = () => {
     const [products] = useState([
@@ -20,6 +21,7 @@ const HorizontalScroll = () => {
         { id: 11, title: 'Sleeping Beauty Gift Bundle', content: 'Experience magic like never before with our light & nourishing Skintillate Booster Oil which heals your skin &...', image: image2 },
     ]);
     // const [scroll] = useState(300)
+    const navigate = useNavigate();
 
     useEffect(() => {
         const cardElements = document.querySelectorAll('.my-card');
@@ -37,6 +39,10 @@ const HorizontalScroll = () => {
             });
         });
     }, []);
+
+    const onEdit = (data:any) => {
+        navigate('/productDetail', { state: { Id: data } });
+    }
 
     // const scrollLeft = () => {
     //     if (scrollContainerRef.current) {
@@ -61,7 +67,7 @@ const HorizontalScroll = () => {
                             <div className="card-body">
                                 <h5 className="card-title d-flex justify-content-start">{card.title}</h5>
                                 <p className="card-text d-flex justify-content-start">{card.content}</p>
-                                <button type="button" className="btn w-100 rounded-pill" style={{ border: '1px solid brown', color: '#4A2A1E',borderColor:'#4A2A1E' }}>Shop now</button>
+                                <button type="button" className="btn w-100 rounded-pill" style={{ border: '1px solid brown', color: '#4A2A1E',borderColor:'#4A2A1E' }} onClick={()=>onEdit(card)}>Shop now</button>
                             </div>
                         </div>
                     ))}
