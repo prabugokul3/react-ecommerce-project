@@ -8,8 +8,6 @@ import '@fortawesome/fontawesome-free/css/all.css';
 
 export const Home = () => {
 
-
-
     return (
         <div className=''>
             <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
@@ -37,8 +35,6 @@ export const Home = () => {
             <div className="mt-5  ">
                 <HorizontalScroll />
             </div>
-
-           
         </div>
     );
 };

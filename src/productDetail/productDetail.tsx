@@ -1,12 +1,17 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 import './productDetail.css'
 import image1 from '../images/pexels-mareefe-672046.jpg';
 import image2 from '../images/pexels-lilartsy-1793035.jpg';
 import image3 from '../images/pexels-christina99999-25676797 (1).jpg';
+import { isEmpty } from 'lodash'
+import useLocalStorage from '../useLocalStorage';
+import { AuthContext } from '../authContext';
 
 export const ProductDetail = () => {
+    const authContext = useContext(AuthContext);
+    const { addToCart, readData }: any = authContext;
     const location = useLocation()
     const { Id } = location.state
     useEffect(() => {
@@ -15,7 +20,25 @@ export const ProductDetail = () => {
         }
     }, [Id])
     const [detail, setDetail]: any = useState({})
-    console.log(detail)
+    const [product, setProduct]: any = useLocalStorage("cartProduct", [], "json")
+    const fetchProduct = async () => {
+        const fetchDtata = await readData('cartProduct')
+        setProduct(fetchDtata)
+    }
+    useEffect(() => {
+        fetchProduct()
+    }, [product,readData])
+    const addCart = (item: any, product: any) => {
+        console.log(product)
+        if (isEmpty(product)) {
+            addToCart(item, 1)
+        } else {
+            const finder = product.findIndex((product: any) => product.id === item.id)
+            if (finder !== -1) {
+                addToCart(product, product[finder].quantity + 1)
+            }
+        }
+    }
 
     return (
         <div className="container mt-5">
@@ -66,8 +89,8 @@ export const ProductDetail = () => {
                     </div>
                     <div className="mt-2 fs-4 content">{detail?.content}</div>
                     <div className='mt-5 mb-2'>
-                        <button type="button" className="btn w-100 rounded-pill mb-2 fs-5" style={{ border: '1px solid brown', color: '#4A2A1E', borderColor: '#4A2A1E' }}>Add to cart</button>
-                        <button type="button" className="btn w-100 rounded-pill fs-5" style={{ border: '1px solid brown', color: 'white', borderColor: '#4A2A1E',backgroundColor:'#4A2A1E' }}>Buy now</button>
+                        <button type="button" className="btn w-100 rounded-pill mb-2 fs-5" style={{ border: '1px solid brown', color: '#4A2A1E', borderColor: '#4A2A1E' }} onClick={() => addCart(detail, product)}>Add to cart</button>
+                        <button type="button" className="btn w-100 rounded-pill fs-5" style={{ border: '1px solid brown', color: 'white', borderColor: '#4A2A1E', backgroundColor: '#4A2A1E' }}>Buy now</button>
                     </div>
                 </div>
             </div>
