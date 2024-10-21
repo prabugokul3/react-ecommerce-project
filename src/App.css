@@ -29,7 +29,7 @@
   }
 }
 
-.navbar{
+.navbar {
   background-color: #4a2a1e;
 }
 
@@ -40,24 +40,24 @@ ul {
 }
 
 li {
-  
+
   text-decoration: none;
   display: inline;
   margin: 2px;
 }
 
-.text3{
+.text3 {
   text-decoration: none;
   color: #e7cca4;
   margin: 10px;
 }
 
-Link{
-  transition:  font-size ;
+Link {
+  transition: font-size;
   font-size: 20px;
 }
 
-Link:hover{
+Link:hover {
   font-size: 22px;
 }
 
@@ -76,14 +76,18 @@ Link:hover{
   background-color: #e7cca4;
 }
 
-.footer{
-  background-color:#caac80;
+.footer {
+  background-color: #caac80;
 }
 
-.cartCount{
+.cartCount {
   transform: translateY(-100%);
   background-color: #4a2a1e;
   width: 90%;
-    height: 70%;;
+  height: 70%;
+  
 }
 
+.modal-dialog {
+  transform: translate(400px, 65px);
+}

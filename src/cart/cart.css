@@ -1,0 +1,29 @@
+.header {
+    color: '#4A2A1E';
+    font-size: 2.5rem;
+    font-family: Georgia, 'Times New Roman', Times, serif
+}
+
+.header1 {
+    color: '#4A2A1E';
+    font-family: Georgia, 'Times New Roman', Times, serif
+}
+
+.title {
+    color: '#4A2A1E';
+    font-size: 1rem;
+    font-family: Georgia, 'Times New Roman', Times, serif
+}
+
+.quantity {
+    color: '#4A2A1E';
+    width: 30%;
+    height: 50px;
+    border-color: '#4A2A1E';
+}
+.quantity1{
+    color: '#4A2A1E';
+    width: 80%;
+    height: 50px;
+    border-color: '#4A2A1E';
+}

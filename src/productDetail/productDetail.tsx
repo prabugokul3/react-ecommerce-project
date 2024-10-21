@@ -5,7 +5,7 @@ import './productDetail.css'
 import image1 from '../images/pexels-mareefe-672046.jpg';
 import image2 from '../images/pexels-lilartsy-1793035.jpg';
 import image3 from '../images/pexels-christina99999-25676797 (1).jpg';
-// import { isEmpty } from 'lodash'
+import Modal from 'react-bootstrap/Modal';
 import useLocalStorage from '../useLocalStorage';
 import { AuthContext } from '../authContext';
 
@@ -13,20 +13,26 @@ export const ProductDetail = () => {
     const authContext = useContext(AuthContext);
     const { addToCart }: any = authContext;
     const location = useLocation()
+
     const { Id } = location.state
+
     useEffect(() => {
         if (Id) {
             setDetail(Id)
         }
     }, [Id])
+
     const [detail, setDetail]: any = useState({})
     const [product]: any = useLocalStorage("cartProduct", [], "json")
-    const [isModal,setIsModal]=useState(false)
-console.log(isModal)
+    const [isModal, setIsModal] = useState(false)
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     const addCart = (item: any, productList: any[]) => {
         const index = productList.findIndex(product => product.id === item.id);
         const product = productList[index];
-    
+
         if (product) {
             addToCart(product, product.quantity + 1);
             setIsModal(true)
@@ -36,6 +42,8 @@ console.log(isModal)
 
         }
     };
+
+
 
     return (
         <div className="container mt-5">
@@ -86,30 +94,50 @@ console.log(isModal)
                     </div>
                     <div className="mt-2 fs-4 content">{detail?.content}</div>
                     <div className='mt-5 mb-2'>
-                        <button type="button" className="btn w-100 rounded-pill mb-2 fs-5" style={{ border: '1px solid brown', color: '#4A2A1E', borderColor: '#4A2A1E' }} onClick={() => addCart(detail, product)}>Add to cart</button>
+                        <button type="button" className="btn w-100 rounded-pill mb-2 fs-5" style={{ border: '1px solid brown', color: '#4A2A1E', borderColor: '#4A2A1E' }} onClick={() => { addCart(detail, product); handleShow() }}>Add to cart</button>
                         <button type="button" className="btn w-100 rounded-pill fs-5" style={{ border: '1px solid brown', color: 'white', borderColor: '#4A2A1E', backgroundColor: '#4A2A1E' }}>Buy now</button>
                     </div>
                 </div>
             </div>
-            {isModal==true?
-            <div className="modal fade position-relative" id="exampleModal"  tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
-                  <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div className="modal-body">
-                  ...
-                </div>
-                <div className="modal-footer">
-                  <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={()=>setIsModal(false)}>Close</button>
-                  <button type="button" className="btn btn-primary">Save changes</button>
-                </div>
-              </div>
-            </div>
-          </div>:''}
-        </div>
+            {isModal === true ?
+                <Modal show={show} onHide={handleClose}>
+
+                    <Modal.Body style={{ backgroundColor: '#4A2A1E' }}>
+                        <div className='container '>
+                            <div className='d-flex justify-content-between'>
+                                <div className=''>
+                                    Item added to your cart
+                                </div>
+                                <div className=''>
+                                    <i className="fa-solid fa-check"></i>
+                                </div>
+                            </div>
+                            <div className='d-flex'>
+
+                                <img src={detail?.image} alt="ProductImage" style={{ objectFit: 'cover' }} className="w-25 h-25 mb-2" />
+                                <div className='mx-2'>
+                                    {detail.title}
+                                </div>
+                            </div>
+                            <div className=''>
+                                <button type="button" className="btn w-100 rounded-pill mb-2 fs-5" style={{ border: '1px solid brown', color: 'white', borderColor: 'white' }} onClick={() =>window.location.assign('/cart')}>View cart ({product.length})</button>
+                                <button type="button" className="btn w-100 rounded-pill fs-5" style={{ border: '1px solid brown', color: 'black', borderColor: 'white', backgroundColor: 'white' }}>Checkout</button>
+                            </div>
+                        </div>
+
+                    </Modal.Body>
+                    {/* <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose}>
+                                Close
+                            </Button>
+                            <Button variant="primary" onClick={handleClose}>
+                                Save Changes
+                            </Button>
+                        </Modal.Footer> */}
+                </Modal>
+                : ''
+            }
+        </div >
 
     )
 }

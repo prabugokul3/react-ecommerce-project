@@ -52,8 +52,11 @@ export const Navbar = () => {
                     </div>
                     <div class='d-lg-none d-md-block  ms-auto text3 position-relative' type="button">
                         <FontAwesomeIcon icon={faShoppingCart} />
-                        <div className='text3 p-1 border border-1 rounded-circle position-absolute cartCount lg-fs-5 d-flex justify-content-center align-items-center'>{product.length}</div>
-
+                        {product.length > 0 ?
+                            <div className='text3 p-1 border border-1 rounded-circle position-absolute cartCount lg-fs-5 d-flex justify-content-center align-items-center'>{product.length}</div>
+                            :
+                            ''
+                        }
                     </div>
                     <div class="collapse navbar-collapse justify-content-end" id="navbarScroll">
                         <ul class="navbar-nav  my-2 my-lg-0 navbar-nav-scroll ">
@@ -69,13 +72,17 @@ export const Navbar = () => {
                     </div>
                     <div class=' d-none d-lg-block ms-5 text3 fs-4 position-relative' type="button" >
                         <FontAwesomeIcon icon={faShoppingCart} />
-                        <div className='text3 p-1 border border-1 rounded-circle position-absolute cartCount fs-5 d-flex justify-content-center align-items-center'>{product.length}</div>
+                        {product.length > 0 ?
+                            <div className='text3 p-1 border border-1 rounded-circle position-absolute cartCount fs-5 d-flex justify-content-center align-items-center'>{product.length}</div>
+                            :
+                            ''
+                        }
                     </div>
                 </div>
             </nav>
             <Outlet />
             <div className='footer '>
-                <div className='d-none d-lg-block d-lg-flex  mt-5'>
+                <div className='d-none d-lg-block d-md-block d-lg-flex d-md-flex  mt-5'>
                     <div className='col '>
                         <div className=' d-flex justify-content-around mt-5'>
                             <div className=' d-sm-none d-lg-block'>
