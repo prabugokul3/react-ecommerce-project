@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useContext, useEffect, useState } from "react"
+import { useCallback, useContext, useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import './productDetail.css'
 import image1 from '../images/pexels-mareefe-672046.jpg';
@@ -11,11 +11,9 @@ import { AuthContext } from '../authContext';
 
 export const ProductDetail = () => {
     const authContext = useContext(AuthContext);
-    const { addToCart }: any = authContext;
+    const { addToCart, readData }: any = authContext;
     const location = useLocation()
-
     const { Id } = location.state
-
     useEffect(() => {
         if (Id) {
             setDetail(Id)
@@ -23,12 +21,18 @@ export const ProductDetail = () => {
     }, [Id])
 
     const [detail, setDetail]: any = useState({})
-    const [product]: any = useLocalStorage("cartProduct", [], "json")
+    const [product, setProducts]: any = useLocalStorage("cartProduct", [], "json")
     const [isModal, setIsModal] = useState(false)
     const [show, setShow] = useState(false);
     const navigate = useNavigate()
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const fetch = useCallback(async () => {
+        const products = await readData('cartProduct');
+        setProducts(products);
+    }, [readData, setProducts]);
+
     const addCart = (item: any, productList: any[]) => {
         const index = productList.findIndex(product => product.id === item.id);
         const product = productList[index];
@@ -42,9 +46,14 @@ export const ProductDetail = () => {
 
         }
     };
+
     const gotToNewPage = () => {
         navigate('/cart');
     }
+
+    useEffect(() => {
+        fetch();
+    }, [product, fetch]);
 
 
     return (
