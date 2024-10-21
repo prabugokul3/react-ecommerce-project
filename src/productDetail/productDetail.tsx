@@ -5,13 +5,13 @@ import './productDetail.css'
 import image1 from '../images/pexels-mareefe-672046.jpg';
 import image2 from '../images/pexels-lilartsy-1793035.jpg';
 import image3 from '../images/pexels-christina99999-25676797 (1).jpg';
-import { isEmpty } from 'lodash'
+// import { isEmpty } from 'lodash'
 import useLocalStorage from '../useLocalStorage';
 import { AuthContext } from '../authContext';
 
 export const ProductDetail = () => {
     const authContext = useContext(AuthContext);
-    const { addToCart, readData }: any = authContext;
+    const { addToCart }: any = authContext;
     const location = useLocation()
     const { Id } = location.state
     useEffect(() => {
@@ -20,29 +20,26 @@ export const ProductDetail = () => {
         }
     }, [Id])
     const [detail, setDetail]: any = useState({})
-    const [product, setProduct]: any = useLocalStorage("cartProduct", [], "json")
-    const fetchProduct = async () => {
-        const fetchDtata = await readData('cartProduct')
-        setProduct(fetchDtata)
-    }
-    useEffect(() => {
-        fetchProduct()
-    }, [product,readData])
-    const addCart = (item: any, product: any) => {
-        console.log(product)
-        if (isEmpty(product)) {
-            addToCart(item, 1)
+    const [product]: any = useLocalStorage("cartProduct", [], "json")
+    const [isModal,setIsModal]=useState(false)
+console.log(isModal)
+    const addCart = (item: any, productList: any[]) => {
+        const index = productList.findIndex(product => product.id === item.id);
+        const product = productList[index];
+    
+        if (product) {
+            addToCart(product, product.quantity + 1);
+            setIsModal(true)
         } else {
-            const finder = product.findIndex((product: any) => product.id === item.id)
-            if (finder !== -1) {
-                addToCart(product, product[finder].quantity + 1)
-            }
+            addToCart(item, 1);
+            setIsModal(true)
+
         }
-    }
+    };
 
     return (
         <div className="container mt-5">
-            <div className="row d-lg-flex">
+            <div className="row d-lg-flex position-relative">
                 <div className="d-none d-lg-block col-lg-1 ">
                     <img src={detail?.image} alt="ProductImage" style={{ objectFit: 'cover' }} className="w-75 h-25 mb-2" />
                 </div>
@@ -94,6 +91,24 @@ export const ProductDetail = () => {
                     </div>
                 </div>
             </div>
+            {isModal==true?
+            <div className="modal fade position-relative" id="exampleModal"  tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div className="modal-body">
+                  ...
+                </div>
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={()=>setIsModal(false)}>Close</button>
+                  <button type="button" className="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>:''}
         </div>
 
     )

@@ -18,6 +18,8 @@ function AuthProvider({ children }: any) {
         }
       }
     const addToCart = (product: any, quantity: any) => {
+        console.log(product)
+
         if (product) {
             const updatedCart = [...cartInfo];
             const index = updatedCart.findIndex(item => item.id === product.id);
@@ -28,8 +30,8 @@ function AuthProvider({ children }: any) {
             } else {
                 product.quantity = quantity
                 product.totalPrice = product.price * product.quantity
+                updatedCart.push(product);
             }
-            console.log(updatedCart)
             setCartInfo(updatedCart)
         }
     }

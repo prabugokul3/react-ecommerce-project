@@ -3,13 +3,24 @@ import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { Link } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import useLocalStorage from './useLocalStorage';
+import { AuthContext } from './authContext';
 
 export const Navbar = () => {
     const [toggleOpen1, setToggleOpen1] = useState(false)
     const [toggleOpen2, setToggleOpen2] = useState(false)
-
+    const authContext = useContext(AuthContext);
+    const { readData } = authContext;
+    const [product, setProduct] = useLocalStorage("cartProduct", [], "json")
+    useEffect(() => {
+        const fetchProduct = async () => {
+            const fetch = await readData('cartProduct')
+            setProduct(fetch)
+        }
+        fetchProduct()
+    }, [product, readData, setProduct])
     useEffect(() => {
         if (toggleOpen2) {
             const element = document.getElementById('drop')
@@ -39,8 +50,10 @@ export const Navbar = () => {
                     <div className='text3 fw-bold fs-1 '>
                         9 S K I N
                     </div>
-                    <div class='d-lg-none d-md-block  ms-auto text3' type="button">
+                    <div class='d-lg-none d-md-block  ms-auto text3 position-relative' type="button">
                         <FontAwesomeIcon icon={faShoppingCart} />
+                        <div className='text3 p-1 border border-1 rounded-circle position-absolute cartCount lg-fs-5 d-flex justify-content-center align-items-center'>{product.length}</div>
+
                     </div>
                     <div class="collapse navbar-collapse justify-content-end" id="navbarScroll">
                         <ul class="navbar-nav  my-2 my-lg-0 navbar-nav-scroll ">
@@ -54,8 +67,9 @@ export const Navbar = () => {
                             <li class="nav-item"> <Link class="text" href="#">Link</Link></li> */}
                         </ul>
                     </div>
-                    <div class=' d-none d-lg-block ms-5 text3 fs-4' type="button" >
+                    <div class=' d-none d-lg-block ms-5 text3 fs-4 position-relative' type="button" >
                         <FontAwesomeIcon icon={faShoppingCart} />
+                        <div className='text3 p-1 border border-1 rounded-circle position-absolute cartCount fs-5 d-flex justify-content-center align-items-center'>{product.length}</div>
                     </div>
                 </div>
             </nav>
