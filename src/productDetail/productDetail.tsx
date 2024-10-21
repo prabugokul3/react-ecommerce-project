@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useContext, useEffect, useState } from "react"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import './productDetail.css'
 import image1 from '../images/pexels-mareefe-672046.jpg';
 import image2 from '../images/pexels-lilartsy-1793035.jpg';
@@ -26,7 +26,7 @@ export const ProductDetail = () => {
     const [product]: any = useLocalStorage("cartProduct", [], "json")
     const [isModal, setIsModal] = useState(false)
     const [show, setShow] = useState(false);
-
+    const navigate = useNavigate()
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const addCart = (item: any, productList: any[]) => {
@@ -42,7 +42,9 @@ export const ProductDetail = () => {
 
         }
     };
-
+    const gotToNewPage = () => {
+        navigate('/cart');
+    }
 
 
     return (
@@ -120,7 +122,7 @@ export const ProductDetail = () => {
                                 </div>
                             </div>
                             <div className=''>
-                                <button type="button" className="btn w-100 rounded-pill mb-2 fs-5" style={{ border: '1px solid brown', color: 'white', borderColor: 'white' }} onClick={() =>window.location.assign('/cart')}>View cart ({product.length})</button>
+                                <button type="button" className="btn w-100 rounded-pill mb-2 fs-5" style={{ border: '1px solid brown', color: 'white', borderColor: 'white' }} onClick={() => gotToNewPage()}>View cart ({product.length})</button>
                                 <button type="button" className="btn w-100 rounded-pill fs-5" style={{ border: '1px solid brown', color: 'black', borderColor: 'white', backgroundColor: 'white' }}>Checkout</button>
                             </div>
                         </div>
