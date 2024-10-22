@@ -4,11 +4,12 @@ import useLocalStorage from '../useLocalStorage';
 import { useNavigate } from "react-router-dom";
 import { useCallback, useContext, useEffect } from 'react';
 import { AuthContext } from '../authContext';
+import { compact, flatMap, uniq } from 'lodash';
 
 export const Cart = () => {
     const authContext = useContext(AuthContext);
     const { addToCart, readData }: any = authContext;
-    const [product,setProducts]: any = useLocalStorage("cartProduct", [], "json")
+    const [product, setProducts]: any = useLocalStorage("cartProduct", [], "json")
 
     const navigate = useNavigate()
 
@@ -16,10 +17,7 @@ export const Cart = () => {
         navigate(-1);
     }
 
-    const fetch = useCallback(async () => {
-        const products = await readData('cartProduct');
-        setProducts(products);
-    }, [readData, setProducts]);
+
 
     const increQuantity = (item: any) => {
         if (item) {
@@ -37,9 +35,25 @@ export const Cart = () => {
             addToCart(products, products.quantity - 1);
         }
     }
+
+    const deleteProduct = (item: any) => {
+        if (item) {
+            const updatedProducts = product.filter((product: any) => product.id === item.id);
+            product.splice(updatedProducts, 1);
+            setProducts(flatMap(compact(uniq(product))))
+        }
+    };
+
+    const fetch = useCallback(async () => {
+        const products = await readData('cartProduct');
+        setProducts(products);
+    }, [readData, setProducts]);
+
     useEffect(() => {
         fetch();
-    }, [product, fetch]);
+    }, [fetch]);
+
+
     return (
         <div className="container">
             <div className="d-flex justify-content-between">
@@ -78,7 +92,7 @@ export const Cart = () => {
                                 <img src={item?.image} alt="ProductImage" style={{ objectFit: 'cover' }} className="w-25 h-100 " />
                                 <div className=''>
                                     <div className='mx-5 title'>
-                                        {item.title}
+                                        {item?.title}
                                     </div>
                                     <div className='mx-5 title'>
                                         Rs. 1,199.00
@@ -86,18 +100,20 @@ export const Cart = () => {
                                 </div>
                             </div>
                             <div className='d-flex  col-4'>
-                                <div className=' d-flex justify-content-around align-items-center  fw-lighter  quantity' style={{ border: '1px solid brown', borderColor: '#4A2A1E' }}>
-                                    <div className='' onClick={() => increQuantity(item)}>
-                                        <i className="fa-solid fa-plus" ></i>
+                                {item?.quantity > 0 ?
+                                    <div className=' d-flex justify-content-around align-items-center  fw-lighter  quantity' style={{ border: '1px solid brown', borderColor: '#4A2A1E' }}>
+                                        <div className='' onClick={() => increQuantity(item)}>
+                                            <i className="fa-solid fa-plus" ></i>
+                                        </div>
+                                        <div className='fw-normal'>
+                                            {item?.quantity}
+                                        </div>
+                                        <div onClick={() => decreQuantity(item)}>
+                                            <i className="fa-solid fa-minus"></i>
+                                        </div>
                                     </div>
-                                    <div className='fw-normal'>
-                                        {item.quantity}
-                                    </div>
-                                    <div onClick={()=>decreQuantity(item)}>
-                                        <i className="fa-solid fa-minus"></i>
-                                    </div>
-                                </div>
-                                <div className='fs-6 mx-5 d-flex' style={{ color: '#4A2A1E' }}>
+                                    : ''}
+                                <div className='fs-6 mx-5 d-flex' style={{ color: '#4A2A1E' }} onClick={() => deleteProduct(item)}>
                                     <i className="fa-solid fa-trash"></i>
                                 </div>
                             </div>
@@ -112,24 +128,26 @@ export const Cart = () => {
                                     <img src={item?.image} alt="ProductImage" style={{ objectFit: 'cover' }} className="w-25 h-25 " />
                                     <div className='mx-2'>
                                         <div className=' title'>
-                                            {item.title}
+                                            {item?.title}
                                         </div>
                                         <div className='flex-col'>
                                             <div className='title'>
                                                 Rs. 1,199.00
                                             </div>
                                             <div className='d-flex'>
-                                                <div className=' d-flex justify-content-around align-items-center  fw-lighter  quantity1' style={{ border: '1px solid brown', borderColor: '#4A2A1E' }}>
-                                                    <div className='' onClick={() => increQuantity(item)}>
-                                                        <i className="fa-solid fa-plus"></i>
+                                                {item?.quantity > 0 ?
+                                                    <div className=' d-flex justify-content-around align-items-center  fw-lighter  quantity1' style={{ border: '1px solid brown', borderColor: '#4A2A1E' }}>
+                                                        <div className='' onClick={() => increQuantity(item)}>
+                                                            <i className="fa-solid fa-plus"></i>
+                                                        </div>
+                                                        <div className='fw-normal'>
+                                                            {item?.quantity}
+                                                        </div>
+                                                        <div onClick={() => decreQuantity(item)}>
+                                                            <i className="fa-solid fa-minus"></i>
+                                                        </div>
                                                     </div>
-                                                    <div className='fw-normal'>
-                                                        {item.quantity}
-                                                    </div>
-                                                    <div onClick={() => decreQuantity(item)}>
-                                                        <i className="fa-solid fa-minus"></i>
-                                                    </div>
-                                                </div>
+                                                    : ''}
                                                 <div className='fs-6  mx-2 d-flex align-items-center' style={{ color: '#4A2A1E' }}>
                                                     <i className="fa-solid fa-trash"></i>
                                                 </div>
