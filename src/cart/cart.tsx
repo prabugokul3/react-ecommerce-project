@@ -148,7 +148,7 @@ export const Cart = () => {
                                                         </div>
                                                     </div>
                                                     : ''}
-                                                <div className='fs-6  mx-2 d-flex align-items-center' style={{ color: '#4A2A1E' }}>
+                                                <div className='fs-6  mx-2 d-flex align-items-center' style={{ color: '#4A2A1E' }} onClick={() => deleteProduct(item)}>
                                                     <i className="fa-solid fa-trash"></i>
                                                 </div>
                                             </div>
